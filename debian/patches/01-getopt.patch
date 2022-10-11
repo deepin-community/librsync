@@ -1,0 +1,34 @@
+From: Andrey Rahmatullin <wrar@debian.org>
+Date: Sat, 26 Oct 2019 23:44:21 +0500
+Subject: Remove unused compression-related rdiff options.
+
+Bug-Debian: http://bugs.debian.org/608470
+Last-Update: 2011-02-08
+---
+ src/rdiff.c | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/src/rdiff.c b/src/rdiff.c
+index b1bc6ce..2c2b30e 100644
+--- a/src/rdiff.c
++++ b/src/rdiff.c
+@@ -111,9 +111,7 @@ static void help(void)
+            "  -b, --block-size=BYTES    Signature block size, 0 (default) for recommended\n"
+            "  -S, --sum-size=BYTES      Signature strength, 0 (default) for max, -1 for min\n"
+            "IO options:\n" "  -I, --input-size=BYTES    Input buffer size\n"
+-           "  -O, --output-size=BYTES   Output buffer size\n"
+-           "  -z, --gzip[=LEVEL]        gzip-compress deltas\n"
+-           "  -i, --bzip2[=LEVEL]       bzip2-compress deltas\n");
++           "  -O, --output-size=BYTES   Output buffer size\n");
+ }
+ 
+ static void rdiff_show_version(void)
+@@ -345,8 +343,6 @@ int main(const int argc, const char *argv[])
+         {"sum-size", 'S', POPT_ARG_INT, &strong_len},
+         {"statistics", 's', POPT_ARG_NONE, &show_stats},
+         {"stats", 0, POPT_ARG_NONE, &show_stats},
+-        {"gzip", 'z', POPT_ARG_NONE, 0, OPT_GZIP},
+-        {"bzip2", 'i', POPT_ARG_NONE, 0, OPT_BZIP2},
+         {"force", 'f', POPT_ARG_NONE, &file_force},
+         {0}
+     };

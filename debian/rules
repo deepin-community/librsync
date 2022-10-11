@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+export DEB_LDFLAGS_MAINT_APPEND=-Wl,--as-needed
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- -DUSE_LIBB2=1
+
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p debian/tmp/usr/share/man/man1
+	install -p doc/rdiff.1 debian/tmp/usr/share/man/man1
+	mkdir -p debian/tmp/usr/share/man/man3
+	install -p doc/librsync.3 debian/tmp/usr/share/man/man3

@@ -1,0 +1,53 @@
+Source: librsync
+Section: libs
+Priority: optional
+Maintainer: Andrey Rahmatullin <wrar@debian.org>
+Build-Depends:
+ debhelper-compat (= 13), cmake, libpopt-dev, libb2-dev
+Standards-Version: 4.5.0
+Homepage: https://github.com/librsync/librsync
+Vcs-Git: https://salsa.debian.org/wrar/librsync.git
+Vcs-Browser: https://salsa.debian.org/wrar/librsync
+Rules-Requires-Root: no
+
+Package: librsync2
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: rsync remote-delta algorithm library
+ librsync implements the rsync remote-delta algorithm, which allows for
+ efficient remote updates of a file, without requiring the old and new versions
+ to both be present at the transmitter. The library uses a stream-based designed
+ so that it can be easily embedded into network applications.
+ .
+ librsync is used by rdiff-backup and duplicity backup applications.
+
+Package: librsync-dev
+Section: libdevel
+Architecture: any
+Depends:
+ ${misc:Depends}, librsync2 (= ${binary:Version}), libpopt-dev
+Conflicts: librsync1
+Description: rsync remote-delta algorithm library (development)
+ librsync implements the rsync remote-delta algorithm, which allows for
+ efficient remote updates of a file, without requiring the old and new versions
+ to both be present at the transmitter. The library uses a stream-based designed
+ so that it can be easily embedded into network applications.
+ .
+ This package contains the development files.
+
+Package: rdiff
+Section: utils
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Binary diff tool for signature-based differences
+ rdiff is a little like diff and patch all rolled into one, with support for
+ binary files. Since it takes advantage of the rsync remote-delta algorithm, you
+ do not need the source file in the same place as your destination file.
+ .
+ To use it, you generate a "signature" of the original file and copy the
+ signature (which is very small) to the same location as the modified file. Then
+ you generate a "delta" which describes the changes required to turn the source
+ file into the modified file. The small delta file can then be used to "patch"
+ the original file, to transform it into the modified file.
